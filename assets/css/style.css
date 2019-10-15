@@ -1,0 +1,27 @@
+.Amatic : {
+    font-family: 'Amatic SC', cursive;
+}
+
+.bodytext {
+
+    font-family: 'Amatic SC', cursive;
+    font-size: 35px;
+    color: whitesmoke;
+    z-index: 1;
+
+}
+
+body {
+    z-index: 0;
+    background: url('/assets/images/Background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.lowerpadding {
+    padding-bottom: 200px;
+}
+
+.toppadding {
+    padding-top: 75px;
+}
