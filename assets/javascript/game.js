@@ -1,95 +1,143 @@
+$(document).ready(function () {
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
+    //  Global Variables
 
- on document.readyState
+    let marsPoints = 0
+    let earthPoints = 0
+    let saturnPoints = 0
+    let jupiterPoints = 0
 
-// Variables
+    let targetScore = 0
+    let currentScore = 0
+    let totalWins = 0
+    let totalLosses = 0
 
-let marsPoints 
-let earthPoints 
-let saturnPoints 
-let jupiterPoints 
-
-let targetScore = 0
-let playerScore = 0
-let totalWins = 0
-let totalLosses = 0
-
-// Set Planets to random value 1 through 12
-
-function randomMarsPoints () {
-    marsPoints = Math.floor(Math.random()*12 + 1);
-}
-function randomEarthPoints () {
-    earthPoints = Math.floor(Math.random()*12 + 1);
-    
-}
-function randomSaturnPoints () {
-    saturnPoints = Math.floor(Math.random()*12 + 1);
-   
-}
-function randomJupiterPoints() {
-    jupiterPoints = Math.floor(Math.random()*12 + 1);
-}
+    // Set random Target Score
 
 
-// Set random Target Score
-function randomTargetScore () {
- randomTargetNum = Math.floor(Math.random()*120 + 1);
-}
+    function randomTargetScore() {
+        targetScore = Math.floor(Math.random() * 120 + 1);
+        console.log("Target Score: " + targetScore);
+    }
 
-$("#target-score").html("Target Score: " + targetScore);
+    randomTargetScore();
 
-// Functions to change Current Score when each Planet is clicked
+    // Write to document
 
-$(".mars").click() {
-
-    playerScore = playerScore + marsPoints
-}
-
-$(".earth").click {
-    playerScore = playerScore + earthPoints
-}
-
-$(".saturn").click {
-    playerScore = playerScore + saturnPoints 
-}
-
-$(".jupiter").click {
-    playerScore = playerScore + saturnPoints 
-}
+    $("#target-score").html("Target Score: " + targetScore);
+    $("#current-score").html("Current Score: " + currentScore);
+    $("#total-wins").html("Total Wins: " + totalWins);
+    $("#total-losses").html("Total Losses: " + totalLosses);
 
 
 
-//Define Win/Loss - Current Score cannot exceed Target Score. Only  win if Target equals current.
 
-if targetScore = currentScore
-
-//win, reset game
-
-else if targetScore > currentScore
-
-//lose, reset game
-
-else no change
+    // Set Planet Points to random value 1 through 12
 
 
+    function randomMarsPoints() {
+        marsPoints = Math.floor(Math.random() * 12 + 1);
+        console.log("Mars Points: " + marsPoints);
+    }
 
-// Reset after win/loss
+    function randomEarthPoints() {
+        earthPoints = Math.floor(Math.random() * 12 + 1);
+        console.log("Earth Points: " + earthPoints);
 
-function onWin () {
+    }
 
-}
+    function randomSaturnPoints() {
+        saturnPoints = Math.floor(Math.random() * 12 + 1);
+        console.log("Saturn Points: " + saturnPoints);
 
-function onLoss () {
-    
-}
+    }
 
-// Write to document
+    function randomJupiterPoints() {
+        jupiterPoints = Math.floor(Math.random() * 12 + 1);
+        console.log("Jupiter Points: " + jupiterPoints);
+    }
 
-$("#target-score").html("Target Score: " + targetScore);
-$("#player-score").html("Player Score: " + playerScore);
-$("#total-wins").html("Player Score: " + totalWins);
-$("#total-losses").html("Player Score: " + totalLosses);
+
+    function randomPlanetPointsForAll() {
+        randomMarsPoints();
+        randomEarthPoints();
+        randomSaturnPoints();
+        randomJupiterPoints();
+    }
+
+    randomPlanetPointsForAll();
+
+
+    // Functions to change Current Score when each Planet is clicked
+
+    $(".mars").on("click", function () {
+        currentScore = currentScore + marsPoints;
+        $("#current-score").html("Current Score: " + currentScore);
+        winOrLose();
+    });
+
+    $(".earth").on("click", function () {
+        currentScore = currentScore + earthPoints;
+        $("#current-score").html("Current Score: " + currentScore);
+        winOrLose();
+    });
+
+    $(".saturn").on("click", function () {
+        currentScore = currentScore + saturnPoints;
+        $("#current-score").html("Current Score: " + currentScore);
+        winOrLose();
+    });
+
+    $(".jupiter").on("click", function () {
+        currentScore = currentScore + jupiterPoints;
+        $("#current-score").html("Current Score: " + currentScore);
+        winOrLose();
+
+    });
+
+
+    //Define Win/Loss - Current Score cannot exceed Target Score. Only win if Target equals current.
+
+    // Reset after win/loss
+
+    function winOrLose() {
+
+        if (targetScore === currentScore) {
+
+            totalWins = totalWins + 1;
+            $("#total-wins").html("Total Wins: " + totalWins);
+           
+            let currentScore = 0;
+            $("#current-score").html("Current Score: " + currentScore);
+           
+            randomTargetScore();
+            $("#target-score").html("Target Score: " + targetScore);
+            
+            let marsPoints = 0;
+            let earthPoints = 0;
+            let saturnPoints = 0;
+            let jupiterPoints = 0;
+            randomPlanetPointsForAll();
+
+        } else if (currentScore > targetScore) {
+
+            totalLosses = totalLosses + 1;
+            $("#total-losses").html("Total Losses: " + totalLosses);
+            
+            let currentScore = 0;
+            $("#current-score").html("Current Score: " + currentScore);
+           
+            randomTargetScore();
+            $("#target-score").html("Target Score: " + targetScore);
+            
+            let marsPoints = 0;
+            let earthPoints = 0;
+            let saturnPoints = 0;
+            let jupiterPoints = 0;
+            randomPlanetPointsForAll();
+
+        }
+
+
+    }
+});
